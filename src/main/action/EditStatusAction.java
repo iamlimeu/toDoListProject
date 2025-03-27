@@ -4,9 +4,8 @@ import main.Input.Input;
 import main.Output.Output;
 import main.toDoList.Task;
 import main.toDoList.toDoList;
-
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 public class EditStatusAction implements UserAction{
     private final Output output;
@@ -27,16 +26,24 @@ public class EditStatusAction implements UserAction{
         output.println("1. Выполнена");
         output.println("2. В процессе");
         output.println("3. Невыполнена");
-        int status = input.askInt("Выберите новый статус: ");
-        Task task = new Task(status);
-        if (toDoList.edit(id, task)) {
-            switch (status) {
-                case 1 -> output.println("Задача обновлена! Статус: " + Task.Status.ВЫПОЛНЕНА + ", Время выполнения: "
-                            + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
-                case 2 -> output.println("Задача обновлена! Статус: " + Task.Status.В_ПРОЦЕССЕ);
-                case 3 -> output.println("Задача обновлена! Статус: " + Task.Status.НЕВЫПОЛНЕНА + ", Время выполнения: Отсутствует");
-                default -> output.println("Ошибка изменения статуса задачи");
+        Task task = toDoList.findById(id);
+        if (task == null) {
+            output.println("Задача с таким номером не найдена");
+        } else if (toDoList.edit(id, task)) {
+            int choiceStatus = input.askInt("Выберите новый статус: ");
+            Task.Status updatedStatus = switch (choiceStatus) {
+                case 1 -> Task.Status.COMPLETED;
+                case 2 -> Task.Status.IN_WORK;
+                case 3 -> Task.Status.UNCOMPLETED;
+                default -> throw new IllegalArgumentException("Неверный выбор");
+            };
+            task.setStatus(updatedStatus);
+            if (updatedStatus == Task.Status.COMPLETED) {
+                task.setCompletionTime(LocalDateTime.now());
+            } else {
+                task.setCompletionTime(null);
             }
+            output.println("Задача обновлена! Статус: " + updatedStatus.getStatus());
         }
         return true;
     }

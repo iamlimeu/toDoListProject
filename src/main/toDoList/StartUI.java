@@ -6,8 +6,6 @@ import main.Input.ValidateInput;
 import main.Output.ConsoleOutput;
 import main.Output.Output;
 import main.action.*;
-
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,7 +50,8 @@ public class StartUI {
                 new DeleteAction(output),
                 new ExitAction(output)
         );
-        new StartUI(output).init(input, toDoList, actions);
+        StartUI startUI = new StartUI(output);
+        startUI.init(input, toDoList, actions);
 
     }
 }

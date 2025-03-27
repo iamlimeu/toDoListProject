@@ -7,8 +7,9 @@ public class Task {
     private int id;
     private String name;
     private int priority;
-    private int status;
+    private Status status = Status.UNCOMPLETED;
     private LocalDateTime time = LocalDateTime.now();
+    private LocalDateTime completionTime;
     private static final DateTimeFormatter CREATED_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Task() { }
@@ -17,7 +18,7 @@ public class Task {
         this.name = name;
     }
 
-    public Task(int status) {
+    public Task(Status status) {
         this.status = status;
     }
 
@@ -26,7 +27,7 @@ public class Task {
         this.name = name;
     }
 
-    public Task(String name, int priority, int status) {
+    public Task(String name, int priority, Status status) {
         this.name = name;
         this.priority = priority;
         this.status = status;
@@ -61,30 +62,52 @@ public class Task {
         this.priority = priority;
     }
 
-    public int getStatus() {
-        return status;
+    public Status setStatus(Status status) {
+        return this.status = status;
+
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
     public LocalDateTime getTime() {
         return time;
     }
 
+    public void setCompletionTime(LocalDateTime time) {
+        this.completionTime = time;
+    }
+
+    public LocalDateTime getCompletionTime() {
+        return completionTime;
+    }
+
     public enum Status {
-        ВЫПОЛНЕНА,
-        В_ПРОЦЕССЕ,
-        НЕВЫПОЛНЕНА
+        COMPLETED("Выполнена"),
+        IN_WORK("В процессе"),
+        UNCOMPLETED("Невыполнена");
+
+        private String status;
+
+        Status(String status) {
+            this.status = status;
+        }
+
+        public String getStatus() {
+            return status;
+        }
     }
 
     @Override
     public String toString() {
+        String completionTimeResult = completionTime != null ?
+                completionTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) : "Отсутствует";
+
         return  id + ". " + name + " | "
                 + "Приоритет: " + priority + " | "
-                + "Статус: "  + Status.НЕВЫПОЛНЕНА + " | "
+                + "Статус: "  + status.getStatus() + " | "
                 + "Дата создания: " + time.format(CREATED_FORMATTER) + " | "
-                + "Время выполнения: отсутствует";
+                + "Время выполнения: " + completionTimeResult;
     }
 }
