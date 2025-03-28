@@ -1,5 +1,7 @@
 package main.toDoList;
 
+import main.taskStatus.Status;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -81,22 +83,6 @@ public class Task {
 
     public LocalDateTime getCompletionTime() {
         return completionTime;
-    }
-
-    public enum Status {
-        COMPLETED("Выполнена"),
-        IN_WORK("В процессе"),
-        UNCOMPLETED("Невыполнена");
-
-        private String status;
-
-        Status(String status) {
-            this.status = status;
-        }
-
-        public String getStatus() {
-            return status;
-        }
     }
 
     @Override

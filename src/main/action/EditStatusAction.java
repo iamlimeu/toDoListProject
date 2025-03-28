@@ -2,6 +2,7 @@ package main.action;
 
 import main.Input.Input;
 import main.Output.Output;
+import main.taskStatus.Status;
 import main.toDoList.Task;
 import main.toDoList.toDoList;
 import java.time.LocalDateTime;
@@ -31,14 +32,14 @@ public class EditStatusAction implements UserAction{
             output.println("Задача с таким номером не найдена");
         } else if (toDoList.edit(id, task)) {
             int choiceStatus = input.askInt("Выберите новый статус: ");
-            Task.Status updatedStatus = switch (choiceStatus) {
-                case 1 -> Task.Status.COMPLETED;
-                case 2 -> Task.Status.IN_WORK;
-                case 3 -> Task.Status.UNCOMPLETED;
+            Status updatedStatus = switch (choiceStatus) {
+                case 1 -> Status.COMPLETED;
+                case 2 -> Status.IN_WORK;
+                case 3 -> Status.UNCOMPLETED;
                 default -> throw new IllegalArgumentException("Неверный выбор");
             };
             task.setStatus(updatedStatus);
-            if (updatedStatus == Task.Status.COMPLETED) {
+            if (updatedStatus == Status.COMPLETED) {
                 task.setCompletionTime(LocalDateTime.now());
             } else {
                 task.setCompletionTime(null);
