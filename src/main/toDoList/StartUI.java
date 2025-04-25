@@ -21,20 +21,19 @@ public class StartUI {
         while (run) {
             showMenu(actions);
             int select = input.askInt("Выберите действие: ");
-            if (select < 0 || select >= actions.size()) {
-                output.println("Неверный ввод - вы можете выбрать 0 .. " + (actions.size() -1));
+            if (select < 1 || select > actions.size()) {
+                output.println("Неверный ввод - вы можете выбрать 1 .. " + (actions.size()));
                 continue;
             }
-            UserAction action = actions.get(select);
+            UserAction action = actions.get(select - 1);
             run = action.execute(input, toDoList);
         }
     }
 
     public void showMenu(List<UserAction> actions) {
         output.println("Меню:");
-        int index = 0;
-        for (UserAction action : actions) {
-            output.println(index++ + ". " + action.name());
+        for (int i = 0; i < actions.size(); i++) {
+            output.println(i + 1 + ". " + actions.get(i).name());
         }
     }
 
@@ -47,7 +46,9 @@ public class StartUI {
                 new EditAction(output),
                 new EditStatusAction(output),
                 new FindAllAction(output),
+                new FindByKeywordAction(output),
                 new DeleteAction(output),
+                new FilterAction(output),
                 new ExitAction(output)
         );
         StartUI startUI = new StartUI(output);

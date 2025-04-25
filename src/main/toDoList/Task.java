@@ -64,9 +64,12 @@ public class Task {
         this.priority = priority;
     }
 
-    public Status setStatus(Status status) {
-        return this.status = status;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
+    public Status getStatus() {
+        return status;
     }
 
     public void setTime(LocalDateTime time) {
@@ -83,6 +86,10 @@ public class Task {
 
     public LocalDateTime getCompletionTime() {
         return completionTime;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return time;
     }
 
     @Override
