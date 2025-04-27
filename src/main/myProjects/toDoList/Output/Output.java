@@ -1,4 +1,4 @@
-package main.Output;
+package main.myProjects.toDoList.Output;
 
 public interface Output {
     void println(Object object);

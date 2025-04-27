@@ -1,11 +1,11 @@
-package main.toDoList;
+package main.myProjects.toDoList;
 
-import main.Input.ConsoleInput;
-import main.Input.Input;
-import main.Input.ValidateInput;
-import main.Output.ConsoleOutput;
-import main.Output.Output;
-import main.action.*;
+import main.myProjects.toDoList.Input.ConsoleInput;
+import main.myProjects.toDoList.Input.Input;
+import main.myProjects.toDoList.Input.ValidateInput;
+import main.myProjects.toDoList.Output.ConsoleOutput;
+import main.myProjects.toDoList.Output.Output;
+import main.myProjects.toDoList.action.*;
 import java.util.Arrays;
 import java.util.List;
 

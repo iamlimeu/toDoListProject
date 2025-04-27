@@ -1,4 +1,4 @@
-package main.Input;
+package main.myProjects.toDoList.Input;
 
 import java.util.Scanner;
 

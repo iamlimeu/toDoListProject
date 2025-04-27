@@ -1,4 +1,4 @@
-package main.taskStatus;
+package main.myProjects.toDoList.taskStatus;
 
 public enum Status {
         COMPLETED("Выполнена"),

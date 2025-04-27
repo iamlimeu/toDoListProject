@@ -1,6 +1,6 @@
-package main.toDoList;
+package main.myProjects.toDoList;
 
-import main.taskStatus.Status;
+import main.myProjects.toDoList.taskStatus.Status;
 
 import java.time.LocalDateTime;
 import java.util.*;

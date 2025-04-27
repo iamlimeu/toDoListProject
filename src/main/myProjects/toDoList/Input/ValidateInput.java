@@ -1,6 +1,6 @@
-package main.Input;
+package main.myProjects.toDoList.Input;
 
-import main.Output.Output;
+import main.myProjects.toDoList.Output.Output;
 
 public class ValidateInput implements Input {
     private final Output output;
