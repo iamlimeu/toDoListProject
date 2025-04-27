@@ -3,11 +3,8 @@ package main.toDoList;
 import main.taskStatus.Status;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class toDoList {
@@ -51,7 +48,15 @@ public class toDoList {
     }
 
     public List<Task> filterTasksByPriority(int from, int to) {
-        return tasks.stream().filter(t -> t.getPriority() > from && t.getPriority() < to).toList();
+        return tasks.stream().filter(t -> t.getPriority() >= from && t.getPriority() < to).toList();
+    }
+
+    public Map<Status, Integer> getTasksStatusStatistics() {
+        return tasks.stream().collect(Collectors.groupingBy(Task::getStatus, Collectors.summingInt(t -> 1)));
+    }
+
+    public double getAveragePriority() {
+        return  tasks.stream().mapToDouble(Task::getPriority).average().orElse(0.0);
     }
 
     public void delete(int id) {

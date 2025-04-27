@@ -43,12 +43,13 @@ public class StartUI {
         toDoList toDoList = new toDoList();
         List<UserAction> actions = Arrays.asList(
                 new CreateAction(output),
+                new DeleteAction(output),
                 new EditAction(output),
                 new EditStatusAction(output),
                 new FindAllAction(output),
-                new FindByKeywordAction(output),
-                new DeleteAction(output),
                 new FilterAction(output),
+                new FindByKeywordAction(output),
+                new StatisticsAction(output),
                 new ExitAction(output)
         );
         StartUI startUI = new StartUI(output);
