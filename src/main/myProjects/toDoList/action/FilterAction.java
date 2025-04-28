@@ -39,12 +39,8 @@ public class FilterAction implements UserAction {
     }
 
     private void filterByStatus(Input input, LogicToDoList logicToDoList) {
-        output.println("""
-                Фильтрация задач по статусу.
-                 \
-                1. Выполнена
-                 2. В процессе
-                 3. Невыполнена""");
+        output.println("Фильтрация задач по статусу.\n 1. Выполнена\n "
+                + "2. В процессе\n 3. Невыполнена");
         int statusChoice = input.askInt("Введите номер желаемого статуса для фильтрации: ");
         switch (statusChoice) {
             case 1:
