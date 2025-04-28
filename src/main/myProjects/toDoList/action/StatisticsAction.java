@@ -2,9 +2,9 @@ package main.myProjects.toDoList.action;
 
 import main.myProjects.toDoList.Input.Input;
 import main.myProjects.toDoList.Output.Output;
+import main.myProjects.toDoList.actionStatus.ActionStatus;
 import main.myProjects.toDoList.taskStatus.Status;
-import main.myProjects.toDoList.toDoList;
-
+import main.myProjects.toDoList.LogicToDoList;
 import java.util.Map;
 
 public class StatisticsAction implements UserAction {
@@ -20,15 +20,18 @@ public class StatisticsAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, toDoList toDoList) {
+    public ActionStatus execute(Input input, LogicToDoList logicToDoList) {
 
-        Map<Status, Integer> status = toDoList.getTasksStatusStatistics();
-        double averagePriority = toDoList.getAveragePriority();
+        Map<Status, Integer> status = logicToDoList.getTasksStatusStatistics();
+        double averagePriority = logicToDoList.getAveragePriority();
         output.println("Статистика задач:");
-        output.println("- Выполнена: " + status.getOrDefault(Status.COMPLETED, 0));
-        output.println("- В процессе: " + status.getOrDefault(Status.IN_WORK, 0));
-        output.println("- Невыполнена: " + status.getOrDefault(Status.UNCOMPLETED, 0));
+        output.println("- Выполнена: "
+                + status.getOrDefault(Status.COMPLETED, 0));
+        output.println("- В процессе: "
+                + status.getOrDefault(Status.IN_WORK, 0));
+        output.println("- Невыполнена: "
+                + status.getOrDefault(Status.UNCOMPLETED, 0));
         output.println("Средний приориет: " + averagePriority);
-        return true;
+        return ActionStatus.CONTINUE;
     }
 }

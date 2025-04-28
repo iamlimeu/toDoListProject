@@ -5,7 +5,7 @@ public enum Status {
         IN_WORK("В процессе"),
         UNCOMPLETED("Невыполнена");
 
-        private String status;
+        private final String status;
 
         Status(String status) {
             this.status = status;

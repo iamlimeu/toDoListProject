@@ -3,8 +3,8 @@ package main.myProjects.toDoList.action;
 import main.myProjects.toDoList.Input.Input;
 import main.myProjects.toDoList.Output.Output;
 import main.myProjects.toDoList.Task;
-import main.myProjects.toDoList.toDoList;
-
+import main.myProjects.toDoList.LogicToDoList;
+import main.myProjects.toDoList.actionStatus.ActionStatus;
 import java.util.List;
 
 public class FindByKeywordAction implements UserAction {
@@ -20,15 +20,15 @@ public class FindByKeywordAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, toDoList toDoList) {
+    public ActionStatus execute(Input input, LogicToDoList logicToDoList) {
         output.println("Поиск задачи по ключевому слову");
         String keyword = input.askStr("Введите ключевое слово: ");
-        List<Task> task = toDoList.findTaskByKeyword(keyword);
+        List<Task> task = logicToDoList.findTaskByKeyword(keyword);
         if (task.isEmpty()) {
-            System.out.println("Задача не найдена по данному ключевому слову");
+            output.println("Задача не найдена по данному ключевому слову");
         } else {
-            task.forEach(System.out::println);
+            task.forEach(output::println);
         }
-        return true;
+        return ActionStatus.CONTINUE;
     }
 }

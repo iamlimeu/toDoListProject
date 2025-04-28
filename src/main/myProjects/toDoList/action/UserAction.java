@@ -1,10 +1,11 @@
 package main.myProjects.toDoList.action;
 
 import main.myProjects.toDoList.Input.Input;
-import main.myProjects.toDoList.toDoList;
+import main.myProjects.toDoList.LogicToDoList;
+import main.myProjects.toDoList.actionStatus.ActionStatus;
 
 public interface UserAction {
     String name();
 
-    boolean execute(Input input, toDoList toDoList);
+    ActionStatus execute(Input input, LogicToDoList logicToDoList);
 }

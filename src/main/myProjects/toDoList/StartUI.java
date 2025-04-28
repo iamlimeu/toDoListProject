@@ -6,6 +6,8 @@ import main.myProjects.toDoList.Input.ValidateInput;
 import main.myProjects.toDoList.Output.ConsoleOutput;
 import main.myProjects.toDoList.Output.Output;
 import main.myProjects.toDoList.action.*;
+import main.myProjects.toDoList.actionStatus.ActionStatus;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,9 +18,9 @@ public class StartUI {
         this.output = output;
     }
 
-    public void init(Input input, toDoList toDoList, List<UserAction> actions) {
-        boolean run = true;
-        while (run) {
+    public void init(Input input, LogicToDoList logicToDoList, List<UserAction> actions) {
+        ActionStatus run = ActionStatus.CONTINUE;
+        while (run == ActionStatus.CONTINUE) {
             showMenu(actions);
             int select = input.askInt("Выберите действие: ");
             if (select < 1 || select > actions.size()) {
@@ -26,7 +28,7 @@ public class StartUI {
                 continue;
             }
             UserAction action = actions.get(select - 1);
-            run = action.execute(input, toDoList);
+            run = action.execute(input, logicToDoList);
         }
     }
 
@@ -40,7 +42,7 @@ public class StartUI {
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
-        toDoList toDoList = new toDoList();
+        LogicToDoList logicToDoList = new LogicToDoList();
         List<UserAction> actions = Arrays.asList(
                 new CreateAction(output),
                 new DeleteAction(output),
@@ -53,7 +55,6 @@ public class StartUI {
                 new ExitAction(output)
         );
         StartUI startUI = new StartUI(output);
-        startUI.init(input, toDoList, actions);
-
+        startUI.init(input, logicToDoList, actions);
     }
 }

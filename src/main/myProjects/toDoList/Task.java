@@ -94,8 +94,9 @@ public class Task {
 
     @Override
     public String toString() {
-        String completionTimeResult = completionTime != null ?
-                completionTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) : "Отсутствует";
+        String completionTimeResult = completionTime != null
+                ? completionTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))
+                : "Отсутствует";
 
         return  id + ". " + name + " | "
                 + "Приоритет: " + priority + " | "

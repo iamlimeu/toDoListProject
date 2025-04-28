@@ -2,7 +2,8 @@ package main.myProjects.toDoList.action;
 
 import main.myProjects.toDoList.Input.Input;
 import main.myProjects.toDoList.Output.Output;
-import main.myProjects.toDoList.toDoList;
+import main.myProjects.toDoList.LogicToDoList;
+import main.myProjects.toDoList.actionStatus.ActionStatus;
 
 public class ExitAction implements UserAction{
     private final Output output;
@@ -17,8 +18,8 @@ public class ExitAction implements UserAction{
     }
 
     @Override
-    public boolean execute(Input input, toDoList toDoList) {
+    public ActionStatus execute(Input input, LogicToDoList logicToDoList) {
         output.println("Завершение программы");
-        return false;
+        return ActionStatus.EXIT;
     }
 }
